@@ -112,29 +112,16 @@ function fcc_filter_ep_search_request_args( $request_args, $args = '', $scope = 
 }
 add_filter( 'ep_formatted_args', 'fcc_filter_ep_search_request_args' );
 
-
 /*--------------------------------------------------------------
 # Debug
 --------------------------------------------------------------*/
-// PC::Debug( json_encode( $request_args ),'fcc_filter_ep_search_request_args' );
 
-function fcc_ep_formatted_args_callback( $ep_formatted_args, $args = '' ) {
-	//$existing_query = $ep_formatted_args['query'];
-	if ( class_exists( 'PC' ) ) {
-		PC::debug( $ep_formatted_args, 'ep_formatted_args' );
-	}
-	return $ep_formatted_args;
+/**
+ * Add local debug filters
+ *
+ * Don't include on production or FCC server environments.
+ * @since 1.17.02.13
+ */
+if ( ! getenv( 'ENVIRONMENT' ) ) {
+	require_once( plugin_dir_path( __FILE__ ) . '/includes/debug.php' );
 }
-//add_filter( 'ep_formatted_args', 'fcc_ep_formatted_args_callback', 300, 2 );
-
-function fcc_ep_pre_get_posts( $query ) {
-	PC::debug( $query, 'action_pre_get_posts' );
-	return $query;
-}
-//add_action( 'pre_get_posts', 'fcc_ep_pre_get_posts', 5 );
-
-function fcc_filter_posts_request( $request, $query ) {
-	PC::debug( $request, '$request' );
-	PC::debug( $query, '$query' );
-}
-//add_filter( 'posts_request', 'fcc_filter_posts_request', 10, 2 );
