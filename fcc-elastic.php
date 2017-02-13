@@ -4,7 +4,7 @@ Plugin Name: FCC Elastic
 Plugin URI: https://github.com/openfcci/fcc-elastic
 Description: Customization to extend ElasticPress and Elasticsearch functionality.
 Author: Forum Communications Company
-Version: 1.16.08.23
+Version: 1.17.02.13
 Author URI: http://forumcomm.com/
 */
 
@@ -69,6 +69,29 @@ function fcc_filter_ep_search_scope( $scope ) {
 }
 add_filter( 'ep_search_scope', 'fcc_filter_ep_search_scope' );
 
+/**
+ * Filter the number of shards per index
+ *
+ * @param int $shards
+ * @since 1.17.02.13
+ */
+function fcc_ep_default_index_number_of_shards( $shards ) {
+	$shards = 3;
+	return $shards;
+}
+add_filter( 'ep_default_index_number_of_shards', 'fcc_ep_default_index_number_of_shards' );
+
+/**
+ * Filter the number of shards per index
+ *
+ * @param int $replicas
+ * @since 1.17.02.13
+ */
+function fcc_ep_default_index_number_of_replicas( $replicas ) {
+	$replicas = 1;
+	return $replicas;
+}
+add_filter( 'ep_default_index_number_of_replicas', 'fcc_ep_default_index_number_of_replicas' );
 
 /**
  * Filter the search request arguments

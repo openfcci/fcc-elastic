@@ -1,6 +1,7 @@
 <?php
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
+
 /*--------------------------------------------------------------
 # Debug
 --------------------------------------------------------------*/
@@ -35,3 +36,16 @@ function fcc_filter_posts_request( $request, $query ) {
 	return $request;
 }
 add_filter( 'posts_request', 'fcc_filter_posts_request', 10, 2 );
+
+/*--------------------------------------------------------------
+# Unused code
+--------------------------------------------------------------*/
+
+function fcc_filter_ep_index_shards( $mapping ) {
+	if ( empty( $mapping['settings']['index'] ) ) {
+		$mapping['settings']['index'] = array();
+		$mapping['settings']['index']['number_of_shards'] = 3;
+	}
+	return $mapping;
+}
+//add_filter( 'ep_config_mapping', 'fcc_filter_ep_index_shards' );
